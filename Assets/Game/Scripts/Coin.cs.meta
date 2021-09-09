@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: eafa348a2080fe14280ef36ad159dc16
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _coinPickUpSound: {fileID: 8300000, guid: 8b58dd752e4a81b47a0deb149a13157d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
