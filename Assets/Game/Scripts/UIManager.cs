@@ -41,4 +41,14 @@ public class UIManager : MonoBehaviour
     {
         _coinImage.SetActive(false);
     }
+
+    public void PressETextEnabled()
+    {
+        _pressEtext.enabled = true;
+    }
+
+    public void PressETextDisabled()
+    {
+        _pressEtext.enabled = false;
+    }
 }

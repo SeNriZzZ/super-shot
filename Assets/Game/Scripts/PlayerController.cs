@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] private GameObject _hitMarkerPrefab;
     [SerializeField] private AudioSource _weaponAudio;
+    [SerializeField] private GameObject _weapon;
 
     private int _maxAmmo = 50;
     [SerializeField] private int _currentAmmo;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private UIManager _uiManager;
 
     public bool hasCoin = false;
+    public bool weaponEnabled = false;
 
     void Start()
     {
@@ -88,18 +90,21 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        _muzzleFlash.SetActive(true);
-        _currentAmmo--;
-        _uiManager.UpdateAmmo(_currentAmmo);
-        Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(rayOrigin, out hitInfo))
+        if (weaponEnabled == true)
         {
-            Debug.Log("Hit: " + hitInfo.transform.name);
-            GameObject hitmarker =
-                Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            Destroy(hitmarker, 2f);
+            _muzzleFlash.SetActive(true);
+            _currentAmmo--;
+            _uiManager.UpdateAmmo(_currentAmmo);
+            Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(rayOrigin, out hitInfo))
+            {
+                Debug.Log("Hit: " + hitInfo.transform.name);
+                GameObject hitmarker =
+                    Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                Destroy(hitmarker, 2f);
+            }
         }
     }
 
@@ -110,5 +115,11 @@ public class PlayerController : MonoBehaviour
         _uiManager.UpdateAmmo(_currentAmmo);
         _isReloading = false;
         _uiManager.DisableReload();
+    }
+
+    public void EnableWeapon()
+    {
+        _weapon.SetActive(true);
+        weaponEnabled = true;
     }
 }
